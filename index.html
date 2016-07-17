@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Example</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="extra/jquery-ui-bootstrap/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="extra/jquery-ui-bootstrap/css/custom-theme/jquery-ui-1.10.0.custom.css">
+    <link rel="stylesheet" href="extra/jquery-ui-bootstrap/assets/css/font-awesome.min.css" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+      svg {
+        z-index: -1;
+      }
+      .message text {
+        fill: blue;
+      }
+      .entity rect {
+        fill: rgba(0, 0, 0, 0);
+      }
+      .entity line {
+        strokeWidth: 3px;
+      }
+      .entity:hover line.shown {
+        stroke: blue;
+      }
+      .entity:hover rect {
+        stroke: blue;
+        stroke-dasharray: 5;
+      }
+
+      .entity-tooltip {
+        padding: 5px;
+        cursor: pointer;
+      }
+
+      .message {
+        cursor: pointer; 
+      }
+    </style>
+  </head>
+  <body>
+    <svg id="diagram1"></svg>
+    <svg id="diagram2"></svg>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="extra/jquery-ui-bootstrap/assets/js/jquery-1.9.0.min.js"></script>
+    <script src="extra/jquery-ui-bootstrap/assets/js/bootstrap.min.js"></script>
+    <script src="extra/jquery-ui-bootstrap/assets/js/jquery-ui-1.10.0.custom.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/snap.svg-min.js"></script>
+    <script src="js/sequence-diagram.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function (){
+        new SequenceDiagram({
+          entities: [
+            { id: "one", name: "One" },
+            { id: "two", name: "Two" },
+            { id: "three",  name: "Three" }
+          ],
+          messages: [
+            { 
+              origin: "one", 
+              destination: "two", 
+              metadata: { 
+                id: "m1", 
+                title: "My name is joao", 
+                description: "<h1>Joao</h1> <p>We like it!</p>" 
+              } 
+            },
+            { origin: "two", destination: "three", metadata: { id:"m2", title: "M2" } },
+            { origin: "two", destination: "one", metadata: { id:"m3", title: "M3" } }
+          ],
+          style: {
+            padding: {
+              left: 50,
+              top: 50,
+              right: 50,
+              bottom: 50
+            },
+            spacing: {
+              betweenEntities: 50,
+              betweenEntitiesAndMessages: 50,
+              betweenMessages: 5
+            }
+          },
+          entity: {
+            style: {
+              padding: {
+                left: 20,
+                top: 10,
+                right: 20,
+                bottom: 10
+              },
+              attributes: {
+                rect: {
+                  fill: "none", 
+                  stroke: "#ccc", 
+                  strokeWidth: 1,
+                  rx: 5,
+                  ry: 5
+                },
+                text: {
+                  
+                },
+                line: {
+                  stroke: "#ccc",
+                  strokeWidth: 1,
+                  "stroke-dasharray":"5,5"
+                },
+                transparentLine: {
+                  stroke: "rgba(0, 0, 0, 0)",
+                  strokeWidth: 20
+                }
+              }
+            }
+          },
+          message: {
+            style: {
+              padding: {
+                left: 10,
+                right: 10,
+                top: 10,
+                bottom: 10
+              },
+              attributes: {
+                text: {
+
+                },
+                line: {
+
+                },
+                arrow: {
+                  fill: "#000"
+                }
+              }
+            },
+            size: {
+              arrow: {
+                deltaAngle: Math.PI / 8,
+                size: 10
+              }
+            }
+          }
+        }).draw("#diagram1");
+      });
+    </script>
+  </body>
+</html>
